@@ -1,6 +1,7 @@
 import tkinter as tk
 import requests
 import time
+from tkinter import messagebox
 
 def getWeather():
     city = textField.get()
@@ -23,6 +24,10 @@ def getWeather():
 
         label1.config(text=final_info)
         label2.config(text=final_data)
+
+        if temp > 50 or temp < 10:
+            messagebox.showwarning("Today weather is very Hot", "Today Weather is very Cold")
+
     except Exception as e:
         label1.config(text="")
         label2.config(text="No Location Found")
@@ -36,7 +41,7 @@ t = ("poppins", 35, "bold")
 textField = tk.Entry(canvas, justify='center', width=20, font=t)
 textField.pack(pady=20)
 textField.focus()
-textField.bind('<Return>', lambda event=None: getWeather())
+textField.bind('<Return>', getWeather())
 
 label1 = tk.Label(canvas, font=t)
 label1.pack()
